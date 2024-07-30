@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.15" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45065.4027049653" ReportOptions.Description.Text="" ReportOptions.LastChange="45067.588511875" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Variables>
+    <item Name=" Generales"/>
+    <item Name="cliente"/>
+    <item Name="factura"/>
+    <item Name="celular"/>
+    <item Name="empresa"/>
+    <item Name="rif_empresa"/>
+    <item Name="DIRECCION"/>
+    <item Name="url"/>
+  </Variables>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" HGuides.Text="" VGuides.Text="" PaperWidth="100" PaperHeight="28" PaperSize="256" LeftMargin="1" RightMargin="1" TopMargin="1" BottomMargin="1" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxShapeView Name="Shape1" AllowVectorExport="True" Left="83.14966" Top="52.91342" Width="283.46475" Height="37.7953" Frame.Typ="0"/>
+    <TfrxMemoView Name="Memo1" AllowVectorExport="True" Left="3.77953" Top="0" Width="291.02381" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="[empresa]"/>
+    <TfrxMemoView Name="rif_empresa" AllowVectorExport="True" Left="0" Top="86.92919" Width="83.14966" Height="11.33859" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="[rif_empresa]"/>
+    <TfrxMemoView Name="cliente" AllowVectorExport="True" Left="68.03154" Top="30.23624" Width="291.02381" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="[cliente]"/>
+    <TfrxMemoView Name="Memo2" AllowVectorExport="True" Left="3.77953" Top="30.23624" Width="60.47248" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="CLIENTE:"/>
+    <TfrxMemoView Name="DIRECCION" AllowVectorExport="True" Left="86.92919" Top="56.69295" Width="275.90569" Height="34.01577" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="[DIRECCION]"/>
+    <TfrxMemoView Name="Memo3" AllowVectorExport="True" Left="3.77953" Top="52.91342" Width="68.03154" Height="11.33859" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="DOCUMENTO:"/>
+    <TfrxMemoView Name="Memo4" AllowVectorExport="True" Left="3.77953" Top="68.03154" Width="68.03154" Height="11.33859" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="[factura]"/>
+    <TfrxLineView Name="Line1" AllowVectorExport="True" Left="0" Top="86.92919" Width="79.37013" Height="0" Color="0" Frame.Typ="0" Diagonal="True"/>
+    <TfrxBarcode2DView Name="Barcode2D1" AllowVectorExport="True" Left="328.81911" Top="0" Width="38.64564" Height="38.64564" StretchMode="smActualHeight" AutoSize="False" Expression="&#60;url&#62;" BarType="bcCodeQR" BarProperties.Encoding="qrAuto" BarProperties.QuietZone="0" BarProperties.ErrorLevels="ecL" BarProperties.PixelSize="4" BarProperties.CodePage="0" BarProperties.Logo.Width="32" BarProperties.Logo.Height="32" BarProperties.GraphicMarker.ShowGraphicMarker="False" BarProperties.GraphicMarker.WidthLine="4" BarProperties.GraphicMarker.Distance="8" Frame.Typ="0" Rotation="0" ShowText="False" HexData="31003200330034003500360037003800" Zoom="0.460067142857143" FontScaled="True" QuietZone="0" ColorBar="0"/>
+  </TfrxReportPage>
+</TfrxReport>

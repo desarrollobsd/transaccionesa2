@@ -1,0 +1,107 @@
+unit UnitLicores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ComCtrls, Vcl.StdCtrls,
+  frxClass, frxDBSet, system.DateUtils;
+
+type
+  TformLicores = class(TForm)
+    grp1: TGroupBox;
+    lbl1: TLabel;
+    lbl3: TLabel;
+    dtinicio: TDateTimePicker;
+    dtconteo: TDateTimePicker;
+    btn1: TSpeedButton;
+    btn2: TSpeedButton;
+    cbb1: TComboBox;
+    lbl2: TLabel;
+    mmo1: TMemo;
+    edt1: TEdit;
+    frLibroLicores: TfrxReport;
+    fsqPrecios: TfrxDBDataset;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    lbl6: TLabel;
+    edtCliente: TEdit;
+    edtRif: TEdit;
+    edtInventario: TEdit;
+    fsqentradas: TfrxDBDataset;
+    procedure btn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure dtconteoExit(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formLicores: TformLicores;
+
+implementation
+
+{$R *.dfm}
+
+uses UnitDatos;
+
+procedure TformLicores.btn1Click(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TformLicores.btn2Click(Sender: TObject);
+begin
+  if edtInventario.Text = '' then
+  begin
+    ShowMessage('Debe indicar el Inventario Anterior');
+    edtInventario.SetFocus;
+  end
+  else
+  begin
+    d.sqlicores.SQL.Clear;
+  d.sqlicores.Close;
+  d.sqlicores.SQL.Add('SELECT S1.FTI_RIFCLIENTE, S1.FTI_DOCUMENTO AS DOCUMENTO, S1.FTI_FECHAEMISION, S1.FTI_TIPO, S1.FTI_STATUS, S2.FI_SUBCATEGORIA AS ESPECIE, S1.FTI_PERSONACONTACTO, S1.FTI_ZONAVENTA, S1.FTI_SERIE, S.FDI_CODIGO, S.FDI_DEPOSITOSOURCE,');
+  d.sqlicores.SQL.Add('S.FDI_CANTIDAD, S2.FI_DESCRIPCION, S2.FI_CATEGORIA, S2.FI_UNIDAD AS LTS, S2.FI_MARCA, S2.FI_REFERENCIA AS GRADOALCOHOLICO, S2.FI_CAPACIDAD AS CAPACIDAD,');
+  d.sqlicores.SQL.Add('S2.FI_MODELO AS NACIONALIMPORTADO, S2.FI_MONTOCOMISION AS COMISION, S4.FZ_DESCRIPCION AS DESTINO');
+  d.sqlicores.SQL.Add('FROM SOperacionInv S1');
+  d.sqlicores.SQL.Add('INNER JOIN sDetalleventa S ON (S1.FTI_AUTOINCREMENT=S.FDI_OPERACION_AUTOINCREMENT)');
+  d.sqlicores.SQL.Add('INNER JOIN SInventario S2 ON (S.FDI_CODIGO=S2.FI_CODIGO)');
+  d.sqlicores.SQL.Add('INNER JOIN Scategoria S3 ON (S2.FI_CATEGORIA=S3.FD_CODIGO)');
+  d.sqlicores.SQL.Add('LEFT OUTER JOIN SZonas S4 ON (S1.FTI_ZONAVENTA=S4.FZ_CODIGO)');
+  d.sqlicores.SQL.Add('WHERE (S2.FI_CATEGORIA = '''+edt1.Text+''') AND (S1.FTI_TIPO=11) AND (S1.FTI_STATUS=1)AND(S1.FTI_FECHAEMISION BETWEEN '''+FormatDateTime('yyyy-mm-dd',dtconteo.Date)+''' AND '''+FormatDateTime('yyyy-mm-dd',dtinicio.Date)+''')AND(S1.FTI_SERIE='''+cbb1.Text+''')AND(S2.FI_UNIDAD <> '''')');
+  d.sqlicores.SQL.Add('ORDER BY S1.FTI_FECHAEMISION');
+ // mmo1.Lines.Add(d.sqlicores.SQL.Text);
+  d.sqlicores.Open;
+  frLibroLicores.Variables.Variables['cliente']:=QuotedStr(edtCliente.Text);
+  frLibroLicores.Variables.Variables['rif']:=QuotedStr(edtRif.Text);
+  frLibroLicores.Variables.Variables['inventario']:=QuotedStr(edtInventario.Text);
+  frLibroLicores.ShowReport;
+  end;
+end;
+
+
+procedure TformLicores.dtconteoExit(Sender: TObject);
+var
+  mes, dia, ano :Word;
+begin
+
+dtinicio.Date:=dtconteo.date+  (DaysInMonth(dtconteo.date)-DayOf(dtconteo.date));
+end;
+
+procedure TformLicores.FormShow(Sender: TObject);
+var
+  mes, dia, ano :Word;
+begin
+decodedate(now, ano, mes, dia);
+dtconteo.Date:=encodeDate(ano, mes, 1);
+dtinicio.Date:=Now+  (DaysInMonth(now)-DayOf(now));
+edtRif.Clear;
+edtCliente.Clear;
+edtInventario.Clear;
+end;
+
+end.
